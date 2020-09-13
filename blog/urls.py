@@ -7,4 +7,5 @@ urlpatterns = [
     path('detail/<int:id>', views.detail, name = 'detail'),
     path('login/', views.loginUser, name = 'login'),
     path('logout/', views.logoutUser, name = 'logout'),
+    path('comment/', views.commentUser, name = 'comment'),
 ]

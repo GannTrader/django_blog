@@ -47,12 +47,14 @@
 	</div>	
 	<div class="container">
 		<div class="row">
+			<!-- Left content -->
 			<div class="col-md-8">
 				<div class="row">
 					{% block content %}
 					{% endblock %}
 				</div>
 			</div>
+			<!-- Right content -->
 			<div class="col-md-4">
 				<div class="card">
 					<div class="card-body">
@@ -79,5 +81,18 @@
 			</div>
 		</div>
 	</div>
+	<script>
+		function comment(id){
+			var cmt_user = $("#cmt_user").val();
+			var cmt_email = $("#cmt_email").val();
+			var cmt_body = $("#cmt_body").val();
+
+			$.post("{% url 'blog:comment' %}", 
+	  			{'id':id, 'cmt_user':cmt_user, 'cmt_email':cmt_email, 'cmt_body':cmt_body, 'csrfmiddlewaretoken': '{{csrf_token}}' }, 
+	  			function(data){
+	  				$("#reload").hide();
+	  		});
+		}
+	</script>
 </body>
 </html>

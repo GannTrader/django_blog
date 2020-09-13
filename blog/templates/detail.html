@@ -3,8 +3,38 @@
 <div class="card">
 	<div class="card-body">
 		<img src="/media/{{post.image}}" alt="" width="100%">
+		<p>{{post.created_at}}</p>
 		<h4 class="card-title my-3">{{post.title}}</h4>
 		<p class="card-text">{{post.body}}</p>
 	</div>
 </div>
+
+<div class="card">
+	<div class="card-header">
+		User Comment!
+	</div>
+	<div class="card-body">
+		{% if comments %}
+		{% for comment in comments %}
+		<p><span class="font-weight-bold">{{comment.username}}</span>: {{comment.comment}} --- <span class="font-italic">{{comment.created_at}}</span></p>
+		{% endfor %}
+		{% endif %}
+	</div>
+</div>
+
+<div class="card">
+	<div class="card-header">
+		Leave a Reply
+	</div>
+	<div class="card-body">
+		<form action="" method="post" accept-charset="utf-8">
+			{% csrf_token %}
+			<p>Username: <input type="text" id="cmt_user" class="form-control" required></p>
+			<p>Email: <input type="email" id="cmt_email" class="form-control" required></p>
+			<p>Comment: <textarea id="cmt_body" class="form-control" required></textarea></p>
+			<button onclick="comment({{post.id}})" class="btn btn-dark">Submit</button>
+		</form>
+	</div>
+</div>
+
 {% endblock %}
