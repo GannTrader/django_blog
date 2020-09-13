@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="card">
+	<div class="card-body">
+		<img src="/media/{{post.image}}" alt="" width="100%">
+		<h4 class="card-title my-3">{{post.title}}</h4>
+		<p class="card-text">{{post.body}}</p>
+	</div>
+</div>
+{% endblock %}

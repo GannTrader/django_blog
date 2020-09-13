@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Index</title>
+	<link rel="stylesheet" href="">
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+	<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+	<!-- Popper JS -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+	<!-- Latest compiled JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+		<!-- Brand -->
+		<a class="navbar-brand" href="{% url 'blog:index' %}">Navbar</a>
+
+		<!-- Toggler/collapsibe Button -->
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<!-- Navbar links -->
+		<div class="collapse navbar-collapse" id="collapsibleNavbar">
+			<ul class="navbar-nav">
+				<li class="nav-item">
+					<a class="nav-link" href="#">Link</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#">Link</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#">Link</a>
+				</li>
+			</ul>
+		</div>
+	</nav>
+	<div class="jumbotron text-center">
+		<h2>This is header image</h2>
+	</div>	
+	<div class="container">
+		<div class="row">
+			<div class="col-md-8">
+				<div class="row">
+					{% block content %}
+					{% endblock %}
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="card">
+					<div class="card-body">
+						<p>Search: <input type="text" placeholder="Enter keyword here..." class="form-control"></p>
+					</div>
+				</div>
+
+				<div class="card my-3">
+					<div class="card-header bg-dark text-light">User Login</div>
+					<div class="card-body">
+						{% if user.is_authenticated %}
+						<p>Hello {{request.user}}, Welcome back!</p>
+						<p><a href="{% url 'blog:logout' %}" title="">Logout</a></p>
+						{% else %}
+						<form action="{% url 'blog:login' %}" method="post" accept-charset="utf-8">
+							{% csrf_token %}
+							<p>Username: <input type="text" name="username" class="form-control" placeholder="Enter username or email..."></p>
+							<p>Password: <input type="password" name="password" class="form-control" placeholder="Enter password..."></p>
+							<p><input type="submit" class="btn btn-dark" value="Login"></p>
+						</form>
+						{% endif %}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

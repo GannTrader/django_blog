@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+{% for post in posts %}
+<div class="col-md-6">
+	<div class="card">
+		<div class="card-body">
+			<img src="/media/{{post.image}}" alt="" width="100%">
+			<h4 class="card-title my-3">{{post.title}}</h4>
+			<p class="card-text">{{post.body}}</p>
+			<a href="{% url 'blog:detail' post.id %}" class="btn btn-dark">See More</a>
+		</div>
+	</div>
+</div>
+{% endfor %}
+{% endblock %}
