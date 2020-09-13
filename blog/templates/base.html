@@ -18,30 +18,35 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 <body>
-	<nav class="navbar navbar-expand-md bg-dark navbar-dark">
-		<!-- Brand -->
-		<a class="navbar-brand" href="{% url 'blog:index' %}">Navbar</a>
+	<div class="sticky-top">
+		<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+			<!-- Brand -->
+			<a class="navbar-brand" href="{% url 'blog:index' %}">Navbar</a>
 
-		<!-- Toggler/collapsibe Button -->
-		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-			<span class="navbar-toggler-icon"></span>
-		</button>
+			<!-- Toggler/collapsibe Button -->
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+				<span class="navbar-toggler-icon"></span>
+			</button>
 
-		<!-- Navbar links -->
-		<div class="collapse navbar-collapse" id="collapsibleNavbar">
-			<ul class="navbar-nav">
-				<li class="nav-item">
-					<a class="nav-link" href="#">Link</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#">Link</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#">Link</a>
-				</li>
-			</ul>
-		</div>
-	</nav>
+			<!-- Navbar links -->
+			<div class="collapse navbar-collapse" id="collapsibleNavbar">
+				<ul class="navbar-nav">
+					<li class="nav-item">
+						<a class="nav-link" href="{% url 'blog:index' %}">Home</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#">Blog</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#">VIP Courses</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#">Contact</a>
+					</li>
+				</ul>
+			</div>
+		</nav>
+	</div>
 	<div class="jumbotron text-center">
 		<h2>This is header image</h2>
 	</div>	
@@ -49,10 +54,10 @@
 		<div class="row">
 			<!-- Left content -->
 			<div class="col-md-8">
-				<div class="row">
-					{% block content %}
-					{% endblock %}
-				</div>
+				
+				{% block content %}
+				{% endblock %}
+				
 			</div>
 			<!-- Right content -->
 			<div class="col-md-4">
@@ -81,17 +86,23 @@
 			</div>
 		</div>
 	</div>
+	<div class="footer bg-dark py-3 text-center text-light">
+		<h3>@Minh Thang 88</h3>
+	</div>
 	<script>
-		function comment(id){
+		function LeaveReply(id){
+			// event.preventDefault();
+
 			var cmt_user = $("#cmt_user").val();
 			var cmt_email = $("#cmt_email").val();
 			var cmt_body = $("#cmt_body").val();
 
 			$.post("{% url 'blog:comment' %}", 
-	  			{'id':id, 'cmt_user':cmt_user, 'cmt_email':cmt_email, 'cmt_body':cmt_body, 'csrfmiddlewaretoken': '{{csrf_token}}' }, 
-	  			function(data){
-	  				$("#reload").hide();
-	  		});
+				{'id':id, 'cmt_user':cmt_user, 'cmt_email':cmt_email, 'cmt_body':cmt_body, 'csrfmiddlewaretoken': '{{csrf_token}}' }, 
+				function(data){
+					// $("#reload").load();
+				});
+			
 		}
 	</script>
 </body>

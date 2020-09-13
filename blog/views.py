@@ -10,7 +10,7 @@ def index(request):
 
 def detail(request, id):
 	post = Post.objects.get(id = id)
-	comments = Comment.objects.filter(post=post).order_by('-created_at')
+	comments = Comment.objects.filter(post=post, status="active").order_by('-created_at')
 	return render(request, 'detail.html', {'post':post, 'comments':comments})
 
 def loginUser(request):
@@ -38,5 +38,5 @@ def commentUser(request):
 		email = cmt_email,
 		comment = cmt_body
 		)
-	return None
+	return redirect('blog:detail')
 

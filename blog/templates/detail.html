@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
+
 <div class="card">
 	<div class="card-body">
 		<img src="/media/{{post.image}}" alt="" width="100%">
@@ -10,30 +11,27 @@
 </div>
 
 <div class="card">
-	<div class="card-header">
-		User Comment!
-	</div>
-	<div class="card-body">
-		{% if comments %}
-		{% for comment in comments %}
-		<p><span class="font-weight-bold">{{comment.username}}</span>: {{comment.comment}} --- <span class="font-italic">{{comment.created_at}}</span></p>
-		{% endfor %}
-		{% endif %}
-	</div>
-</div>
-
-<div class="card">
-	<div class="card-header">
-		Leave a Reply
-	</div>
+	<div class="card-header bg-dark text-light">Leave a Reply</div>
 	<div class="card-body">
 		<form action="" method="post" accept-charset="utf-8">
 			{% csrf_token %}
 			<p>Username: <input type="text" id="cmt_user" class="form-control" required></p>
 			<p>Email: <input type="email" id="cmt_email" class="form-control" required></p>
 			<p>Comment: <textarea id="cmt_body" class="form-control" required></textarea></p>
-			<button onclick="comment({{post.id}})" class="btn btn-dark">Submit</button>
+			<button onclick="LeaveReply({{post.id}})" class="btn btn-dark">Submit</button>
 		</form>
+	</div>
+</div>
+
+<div class="card reload">
+	<div class="card-header bg-dark text-light">User Comment</div>
+	<div class="card-body">
+		{% if comments %}
+		{% for comment in comments %}
+		<p><span class="font-weight-bold font-">{{comment.username}}</span>: {{comment.comment}}</p>
+		<p>{{comment.created_at}} <span onclick="Reply()" class="font-weight-bold">Reply</span></p>
+		{% endfor %}
+		{% endif %}
 	</div>
 </div>
 
